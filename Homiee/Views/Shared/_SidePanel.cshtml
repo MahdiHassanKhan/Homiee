@@ -1,0 +1,31 @@
+﻿
+<nav id="sidebar" class="active">
+    <div class="custom-menu">
+        <button type="button" id="sidebarCollapse" class="btn btn-primary">
+            <i class="fa fa-bars"></i>
+            <span class="sr-only">Toggle Menu</span>
+        </button>
+    </div>
+    <div class="p-4">
+        <h1><a href="index.html" class="logo">Homiee</a></h1>
+
+        @using (Html.BeginForm("","",FormMethod.Get)){
+
+        <label style="font-size:larger">Price</label>
+        <div >
+            <label for="UpperBound">Upper Bound</label>
+            @Html.TextBox("UpperBound", "", new { type = "number", @class = "valid  text-box", @data_val = "true", @data_val_required = "NumKitchens Field is Invalid text-box" })
+        </div>
+        <div >
+            <label for="LowerBound">Lower Bound</label>
+            @Html.TextBox("LowerBound", "", new { type = "number", @class = " valid  text-box", @data_val = "true", @data_val_required = "NumKitchens Field is Invalid text-box" })
+        </div>
+
+        <input type="submit" class="button-27" value="Filter"/>
+
+        }
+
+
+
+    </div>
+</nav>

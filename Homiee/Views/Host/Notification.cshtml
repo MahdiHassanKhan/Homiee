@@ -1,0 +1,148 @@
+﻿@model Homiee.Models.NotificationViewModel
+@{
+    Layout = null;
+}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords"
+          content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Nice lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Nice admin lite design, Nice admin lite dashboard bootstrap 5 dashboard template">
+    <meta name="description"
+          content="Nice Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Homiee</title>
+    <link rel="canonical" href="https://www.wrappixel.com/templates/niceadmin-lite/" />
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="~/Template/Host/assets/images/favicon.png">
+    <!-- Custom CSS -->
+    <link href="~/Template/Host/dist/css/style.min.css" rel="stylesheet" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+    <style>
+        .notification-section {
+            margin-left: 300px;
+            font-size: 20px;
+        }
+
+        .notification-card {
+            width: 90%;
+            height: 280px;
+            margin: 0 auto 5px auto;
+            box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+        }
+
+        .notification-content {
+            display: inline-block;
+        }
+
+        .notification-button {
+            display: inline-block;
+            float: right;
+        }
+
+        .notification-button-yes {
+            background: url("../../Images/ok.png");
+            width: 35px;
+            height: 35px;
+            border: 0;
+            background-repeat: no-repeat;
+            display: inline-block;
+            margin: 20px;
+        }
+
+        .notification-button-no {
+            background: url("../../Images/no.png");
+            width: 35px;
+            height: 35px;
+            border: 0;
+            background-repeat: no-repeat;
+            display: inline-block;
+            margin: 20px;
+        }
+
+        form {
+            display: inline-block;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <div id="main-wrapper" data-navbarbg="skin6" data-theme="light" data-layout="vertical" data-sidebartype="full"
+         data-boxed-layout="full">
+
+        @Html.Partial("_HostSideBar", Model.GetNewNotification)
+
+
+
+
+        <section class="notification-section">
+
+           @foreach(var x in Model.GetNotifications)
+           { 
+                <div class="card notification-card">
+                    <div class="card-body">
+                        <div class="notification-content">
+                            <p>@x.Post.Title</p>
+                            <p>@x.NotifyTime</p>
+                            <p>@x.NotifyText</p>
+                            <p>Check In: <span>@x.Reservation.CheckIn</span></p>
+                            <p>Check Out: <span>@x.Reservation.CheckOut</span></p>
+                        </div>
+                        <div class="notification-button">
+                            @using (Html.BeginForm("ReservationAccept","Host", new { id = x.NotificaitonID }, FormMethod.Post) )
+                            {
+                                <input class="notification-button-yes" type="submit" name="ApproveButtonYes" value="" />
+                            }
+                            @using (Html.BeginForm("ReservationCancel","Host", new { id = x.NotificaitonID }, FormMethod.Post))
+                            {
+                                <input class="notification-button-no" type="submit" name="ApproveButtonNo" value="" />
+                            }
+                            <div>
+                                @if (x.Reservation.Status!=0)
+                                {
+                                    <span class="label label-success" style="float:right">Approved</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-danger">No Approved</span>
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </section>
+
+
+
+        @Html.Partial("_HostFooter")
+
+    </div>
+
+
+
+    <script src="~/Template/Host/assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="~/Template/Host/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="~/Template/Host/assets/extra-libs/sparkline/sparkline.js"></script>
+
+    <!--Wave Effects -->
+    <script src="~/Template/Host/dist/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="~/Template/Host/dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="~/Template/Host/dist/js/custom.min.js"></script>
+</body>
